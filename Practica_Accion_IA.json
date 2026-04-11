@@ -1,0 +1,141 @@
+{
+  "name": "Practica_Accion_IA",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Actúa como un tutor técnico para el usuario. Tu objetivo es explicar conceptos de n8n de forma clara. Si el usuario te saluda, identifícate como su Asistente de Práctica IA."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        -64
+      ],
+      "id": "3af4a6e2-36dc-4cae-a7df-1e13934e1b5a",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        192,
+        160
+      ],
+      "id": "f3c9c953-7e4e-4e8c-8ae6-6de0dafdcf7a",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "A66nmPv9AC7afd6a",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        320,
+        240
+      ],
+      "id": "5e904ba5-68bf-405f-840a-97958cd34ae9",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        416,
+        144
+      ],
+      "id": "69e04a51-76c4-4fd5-b8df-60e306b8e694",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "46d5417c-a395-4821-940d-a1b123eaf8c9",
+      "name": "Un chat para probar la accion IA",
+      "webhookId": "72c62f6f-e061-42d6-bb03-f60eed91701b"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Un chat para probar la accion IA": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "cb09f5da-589d-4970-b3d5-85f3bb59e408",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dacf74f746a5600ccd3c13bea981d616cbbc49c1c627868d1ee2c2bde878613e"
+  },
+  "id": "jF5GjP825AFJkVed",
+  "tags": [
+    {
+      "name": "Acciones_prctc",
+      "id": "BjgEyfGFD2G9oGnO",
+      "updatedAt": "2026-04-11T15:58:04.295Z",
+      "createdAt": "2026-04-11T15:58:04.295Z"
+    }
+  ]
+}
