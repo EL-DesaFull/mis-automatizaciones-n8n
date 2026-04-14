@@ -1,0 +1,335 @@
+{
+  "name": "Practica_Accion_in_app",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "responseMode": "lastNode"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "80a916d1-18d0-482b-93dd-d4a347b67584",
+      "name": "When chat message received",
+      "webhookId": "3c9ecd0c-6eb6-4f7e-a3d8-9d8ead067219"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Eres un extractor de datos técnicos. \nTu objetivo es desglosar el mensaje del usuario en tres campos específicos.\nSi no hay datos suficientes, responde únicamente: N/A.\nSi hay datos, responde estrictamente en este formato:\nPROYECTO: [Nombre del proyecto o cliente]\nHORAS: [Solo el número, ej: 4]\nCOMENTARIO: [Descripción de la tarea realizada]"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "5bc8a135-cae0-4329-be4b-8431a354e1f2",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        304,
+        240
+      ],
+      "id": "53499485-771f-49ec-a059-a84756764add",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1C0Ra9wBiGggEVKJoFmYojPrjEKpp6yyKVQOTvm630nE",
+          "mode": "list",
+          "cachedResultName": "Log_Practicas_n8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C0Ra9wBiGggEVKJoFmYojPrjEKpp6yyKVQOTvm630nE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C0Ra9wBiGggEVKJoFmYojPrjEKpp6yyKVQOTvm630nE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha": "={{ $today.format('dd-MM-yyyy') }}",
+            "Proyecto": "={{ $json.output.match(/PROYECTO:\\s*(.*)/)?.[1] || \"Sin Proyecto\" }}",
+            "Horas": "={{ $json.output.match(/HORAS:\\s*(\\d+)/)?.[1] || 0 }}",
+            "Comentarios": "={{ $json.output.match(/COMENTARIO:\\s*(.*)/)?.[1] || \"Sin comentario\" }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Proyecto",
+              "displayName": "Proyecto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Horas",
+              "displayName": "Horas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Comentarios",
+              "displayName": "Comentarios",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        768,
+        -32
+      ],
+      "id": "3b321855-ef72-4bfd-81d9-f119c51e9219",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "NvWwM1xB3Yw1p3gG",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "8c8a9d86-f87e-4aa1-8109-cda889eebf23",
+              "leftValue": "={{ $json.output }}",
+              "rightValue": "N/A",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        512,
+        0
+      ],
+      "id": "ed20c29b-7254-465c-ab72-b804689e6a8c",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        144,
+        240
+      ],
+      "id": "4a75a428-0a2e-4c12-9266-69b37691dd2e",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "xzY6kKHyOUI6QPja",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const output = $node[\"AI Agent\"].json[\"output\"];\nconst proyecto = output.match(/PROYECTO:\\s*(.*)/)?.[1];\nconst horas = output.match(/HORAS:\\s*(\\d+)/)?.[1];\n\nreturn {\n  text: `✅ *Registro Exitoso*\\n\\n📂 *Proyecto:* ${proyecto}\\n⏱️ *Tiempo:* ${horas} horas\\n\\nLos datos se han organizado en sus respectivas columnas.`\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1008,
+        -32
+      ],
+      "id": "d74878fb-2c81-4827-bc3c-0c0bc3c0f8de",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Recuperamos el mensaje original con la sintaxis correcta\nconst mensajeUsuario = $('When chat message received').first().json.chatInput;\n\n// Construimos una respuesta amable de \"No Entendido\"\nconst respuestaFinal = `\n🤔 *¡Hola! No logré detectar un registro.*\n\nRecibí: _\"${mensajeUsuario}\"_\n\nRecuerda que para registrar tus horas debes indicar el **proyecto** y la **cantidad de horas**. \n_Ejemplo: \"Registra 3 horas en el proyecto API de Seguros\"_\n`.trim();\n\nreturn {\n  text: respuestaFinal\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        768,
+        176
+      ],
+      "id": "6448015c-1df0-469e-a2a4-e7f251df0ecb",
+      "name": "Code in JavaScript1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "c1e744cc-2d6e-4670-be5a-29babda3d231",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dacf74f746a5600ccd3c13bea981d616cbbc49c1c627868d1ee2c2bde878613e"
+  },
+  "id": "T9j4Te3nKUik1JGJ",
+  "tags": [
+    {
+      "name": "Sheet",
+      "id": "4Kj9rHAVVzgEesnX",
+      "updatedAt": "2026-04-14T18:53:11.288Z",
+      "createdAt": "2026-04-14T18:53:11.288Z"
+    },
+    {
+      "updatedAt": "2026-04-11T15:58:04.295Z",
+      "createdAt": "2026-04-11T15:58:04.295Z",
+      "id": "BjgEyfGFD2G9oGnO",
+      "name": "Acciones_prctc"
+    },
+    {
+      "name": "If",
+      "id": "JR8xuuktHKJ5Pd2I",
+      "updatedAt": "2026-04-14T18:53:06.662Z",
+      "createdAt": "2026-04-14T18:53:06.662Z"
+    },
+    {
+      "name": "Code",
+      "id": "g65tEL0dIZ3MruLu",
+      "updatedAt": "2026-04-14T18:53:16.909Z",
+      "createdAt": "2026-04-14T18:53:16.909Z"
+    },
+    {
+      "name": "Groq",
+      "id": "vGcI9nbDY5KwaAV6",
+      "updatedAt": "2026-04-14T18:52:58.699Z",
+      "createdAt": "2026-04-14T18:52:58.699Z"
+    }
+  ]
+}
