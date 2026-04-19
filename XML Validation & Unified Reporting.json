@@ -1,0 +1,578 @@
+{
+  "name": "XML Validation & Unified Reporting",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        -224
+      ],
+      "id": "fcf11fd6-887a-4c07-be50-211eba501c5e",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{\n  xml_raw: `<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ventas>\n  <venta>\n    <id>001</id>\n    <cliente>juan pérez</cliente>\n    <email>JUAN.perez@GMAIL.com</email>\n    <producto>laptop hp pavilion</producto>\n    <cantidad>1</cantidad>\n    <monto>1250.50 USD</monto>\n    <fecha>2024-01-15T10:23:45Z</fecha>\n    <estado>completada</estado>\n  </venta>\n  <venta>\n    <id>002</id>\n    <cliente>maria lópez</cliente>\n    <email>maria_lopez@hotmail.COM</email>\n    <producto>mouse inalambrico</producto>\n    <cantidad>2</cantidad>\n    <monto>$45.99</monto>\n    <fecha>2024-01-15T11:05:12Z</fecha>\n    <estado>COMPLETADA</estado>\n  </venta>\n  <venta>\n    <id>002</id>\n    <cliente>maria lopez</cliente>\n    <email>maria_lopez@hotmail.com</email>\n    <producto>mouse inalámbrico</producto>\n    <cantidad>2</cantidad>\n    <monto>USD 45,99</monto>\n    <fecha>15/01/2024 11:05</fecha>\n    <estado>completada</estado>\n  </venta>\n  <venta>\n    <id>003</id>\n    <cliente>  carlos GÓMEZ  </cliente>\n    <email>carlos.gomez@</email>\n    <producto>teclado mecánico rgb</producto>\n    <cantidad>1</cantidad>\n    <monto>aprox 89.00 dólares</monto>\n    <fecha>2024-01-16</fecha>\n    <estado>pendiente</estado>\n  </venta>\n  <venta>\n    <id>004</id>\n    <cliente>ANA torres</cliente>\n    <email>ana.torres@yahoo.es</email>\n    <producto>monitor 24 pulgadas</producto>\n    <cantidad>uno</cantidad>\n    <monto>$ 199.95</monto>\n    <fecha>2024/01/17 09:30:00</fecha>\n    <estado>Enviado</estado>\n  </venta>\n  <venta>\n    <id>005</id>\n    <cliente>pedro ramirez</cliente>\n    <email>pedro@empresa</email>\n    <producto>auriculares bluetooth</producto>\n    <cantidad>tres</cantidad>\n    <monto>59.99 c/u</monto>\n    <fecha>17-01-2024</fecha>\n    <estado>cancelada</estado>\n  </venta>\n  <venta>\n    <id>006</id>\n    <cliente>luisa fernández</cliente>\n    <email>LUISA.FERNANDEZ@gmail.com</email>\n    <producto>impresora laser</producto>\n    <cantidad>1</cantidad>\n    <monto>320.00€</monto>\n    <fecha>2024-01-18T14:45:00+02:00</fecha>\n    <estado>completada</estado>\n  </venta>\n  <venta>\n    <id>007</id>\n    <cliente>luisa fernandez</cliente>\n    <email>luisa.fernandez@gmail.com</email>\n    <producto>IMPRESORA LASER</producto>\n    <cantidad>1</cantidad>\n    <monto>EUR 320</monto>\n    <fecha>18/01/2024</fecha>\n    <estado>OK</estado>\n  </venta>\n  <venta>\n    <id>008</id>\n    <cliente>jorge SÁNCHEZ</cliente>\n    <email>jorge.sanchez@correo</email>\n    <producto>silla gamer</producto>\n    <cantidad>1</cantidad>\n    <monto>doscientos cincuenta dólares</monto>\n    <fecha>2024-01-19</fecha>\n    <estado>pendiente de pago</estado>\n  </venta>\n  <venta>\n    <id>009</id>\n    <cliente>sofia castro</cliente>\n    <email>sofia..castro@gmail.com</email>\n    <producto>webcam HD</producto>\n    <cantidad>2</cantidad>\n    <monto>$ 75.50 usd</monto>\n    <fecha>2024-01-20T16:00:00</fecha>\n    <estado>completada</estado>\n  </venta>\n  <venta>\n    <id>010</id>\n    <cliente>diego MORALES</cliente>\n    <email> diego.morales@empresa.com </email>\n    <producto>disco ssd 1tb</producto>\n    <cantidad>4</cantidad>\n    <monto>110,00 USD</monto>\n    <fecha>20240121</fecha>\n    <estado>enviado</estado>\n  </venta>\n  <venta>\n    <id>011</id>\n    <cliente>diego morales</cliente>\n    <email>diego.morales@empresa.com</email>\n    <producto>Disco SSD 1TB</producto>\n    <cantidad>4</cantidad>\n    <monto>$110</monto>\n    <fecha>21/01/2024 08:15</fecha>\n    <estado>ENVIADO</estado>\n  </venta>\n  <venta>\n    <id>012</id>\n    <cliente>valentina ruiz</cliente>\n    <email>valentina@</email>\n    <producto>tablet android 10\"</producto>\n    <cantidad>1</cantidad>\n    <monto>n/a</monto>\n    <fecha>2024-01-22</fecha>\n    <estado></estado>\n  </venta>\n  <venta>\n    <id>013</id>\n    <cliente>RICARDO vega</cliente>\n    <email>ricardo.vega@gmail,com</email>\n    <producto>cable hdmi 2m</producto>\n    <cantidad>5</cantidad>\n    <monto>$8.99 cada uno</monto>\n    <fecha>2024-01-23T12:00:00Z</fecha>\n    <estado>completada</estado>\n  </venta>\n  <venta>\n    <id>014</id>\n    <cliente>natalia herrera</cliente>\n    <email>natalia.herrera@outlook.COM</email>\n    <producto>router wifi 6</producto>\n    <cantidad>1</cantidad>\n    <monto>USD 145.00</monto>\n    <fecha>2024-01-24</fecha>\n    <estado>pendiente</estado>\n  </venta>\n</ventas>\n`\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -176,
+        -224
+      ],
+      "id": "da0c8c92-2282-4f37-a99b-7b4ee1c644ce",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "dataPropertyName": "=xml_raw",
+        "options": {
+          "explicitArray": true,
+          "mergeAttrs": true,
+          "trim": true
+        }
+      },
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        64,
+        -224
+      ],
+      "id": "c2fafb63-00a2-4be4-bdd6-da51ebd2f998",
+      "name": "XML"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "ventas.venta",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        288,
+        -224
+      ],
+      "id": "3d2991d0-edb1-47e4-b1b1-116a2a671233",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "instructions": "id: extraer.\n\ncliente: Pascal Case estricto.\n\nemail: minúsculas, trim. Corregir ',' por '.'. \n\ncantidad: Convertir texto a INTEGER (ej: 'uno'->1, 'tres'->3). Defecto 1.\n\nmonto: FLOAT. Limpiar símbolos y texto. Coma por punto. 'n/a'->0.\n\nfecha: Solo YYYY-MM-DD. Ignorar horas.\n\nestado: Pascal Case.\n\nOutput: JSON plano, sin arrays.",
+        "codeGeneratedForPrompt": "id: extraer.\n\ncliente: Pascal Case estricto.\n\nemail: minúsculas, trim. Corregir ',' por '.'. \n\ncantidad: Convertir texto a INTEGER (ej: 'uno'->1, 'tres'->3). Defecto 1.\n\nmonto: FLOAT. Limpiar símbolos y texto. Coma por punto. 'n/a'->0.\n\nfecha: Solo YYYY-MM-DD. Ignorar horas.\n\nestado: Pascal Case.\n\nOutput: JSON plano, sin arrays.",
+        "jsCode": "const items = $input.all();\nconst textToNumber = {\n  uno: 1,\n  dos: 2,\n  tres: 3,\n  cuatro: 4,\n  cinco: 5,\n  seis: 6,\n  siete: 7,\n  ocho: 8,\n  nueve: 9,\n  diez: 10,\n};\nconst cleanedItems = items.map((item) => {\n  const id = item.json.id[0];\n  const cliente = item.json.cliente[0]\n    .split(\" \")\n    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())\n    .join(\" \");\n  const email = item.json.email[0].toLowerCase().trim().replace(\",\", \".\");\n  const cantidad = isNaN(Number(item.json.cantidad[0]))\n    ? textToNumber[item.json.cantidad[0].toLowerCase()] || 1\n    : Number(item.json.cantidad[0]);\n  const monto =\n    parseFloat(item.json.monto[0].replace(/[^0-9.,]/g, \"\").replace(\",\", \".\")) ||\n    0;\n  const fecha = item.json.fecha[0].split(\"T\")[0];\n  const estado = item.json.estado[0]\n    .split(\" \")\n    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())\n    .join(\" \");\n  return { id, cliente, email, cantidad, monto, fecha, estado };\n});\n\nreturn cleanedItems;\n"
+      },
+      "type": "n8n-nodes-base.aiTransform",
+      "typeVersion": 1,
+      "position": [
+        496,
+        -224
+      ],
+      "id": "c89423fe-473f-4c41-ad29-caba5a900aaa",
+      "name": "AI Transform"
+    },
+    {
+      "parameters": {
+        "compare": "selectedFields",
+        "fieldsToCompare": "id",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        -448,
+        32
+      ],
+      "id": "c264d136-8a22-4ba9-b404-f39362bc457e",
+      "name": "Remove Duplicates"
+    },
+    {
+      "parameters": {
+        "compare": "selectedFields",
+        "fieldsToCompare": "email",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        -176,
+        32
+      ],
+      "id": "5be1ff01-ff8f-4a7d-8272-65d6a8b53f4b",
+      "name": "Remove Duplicates1"
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of $input.all()) {\n  let email = item.json.email || \"\";\n  let fecha = item.json.fecha ? item.json.fecha.toString() : \"\";\n  let monto = item.json.monto;\n\n  // --- 1. VALIDACIÓN DE EMAIL (Sofia y otros) ---\n  // Marcamos como inválido si tiene doble punto o si no cumple formato estándar\n  const regexDoblePunto = /(\\.\\.)/;\n  const regexEmailEstandar = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/;\n  \n  if (regexDoblePunto.test(email) || !regexEmailEstandar.test(email)) {\n    item.json.email_valido = false;\n  } else {\n    item.json.email_valido = true;\n  }\n\n  // --- 2, 3 y 4. NORMALIZACIÓN DE FECHA ---\n  if (fecha) {\n    // Reemplazar \"/\" por \"-\" y quitar hora/minuto/segundo (split por espacio o 'T')\n    fecha = fecha.replace(/\\//g, '-').split(/[ T]/)[0];\n\n    // Manejar caso YYYYMMDD (ej: 20240121)\n    if (/^\\d{8}$/.test(fecha)) {\n      fecha = `${fecha.substring(0, 4)}-${fecha.substring(4, 6)}-${fecha.substring(6, 8)}`;\n    }\n    \n    item.json.fecha = fecha;\n  }\n\n  // --- EXTRA: LIMPIEZA DE MONTO ---\n  // Aseguramos que el null sea 0 para que el Summarize no explote\n  if (monto === null || isNaN(monto)) {\n    item.json.monto = 0;\n  }\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        48,
+        32
+      ],
+      "id": "1afa791a-52d0-4265-a089-652d0b51e112",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "b170c9c9-0916-4698-a8e6-ad9242f6be8f",
+              "leftValue": "={{ $json.email_valido }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        288,
+        32
+      ],
+      "id": "b40aba46-63e3-4e9b-ab0a-9559d1d8bc15",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"id\": {{ $json.id }},\n  \"cliente\": \"{{ $json.cliente }}\",\n  \"email\" : \"{{ $json.email }}\",\n  \"mensaje\" : \"Registro requiere corrección\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        512,
+        256
+      ],
+      "id": "4309a6c4-1d27-40d8-b9d9-9f0f9c7d8b27",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1C0Ra9wBiGggEVKJoFmYojPrjEKpp6yyKVQOTvm630nE",
+          "mode": "list",
+          "cachedResultName": "Log_Practicas_n8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C0Ra9wBiGggEVKJoFmYojPrjEKpp6yyKVQOTvm630nE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 396392588,
+          "mode": "list",
+          "cachedResultName": "Hoja 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C0Ra9wBiGggEVKJoFmYojPrjEKpp6yyKVQOTvm630nE/edit#gid=396392588"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.id }}",
+            "cliente": "={{ $json.cliente }}",
+            "email": "={{ $json.email }}",
+            "cantidad": "={{ $json.cantidad }}",
+            "monto": "={{ $json.monto }}",
+            "fecha": "={{ $json.fecha }}",
+            "estado": "={{ $json.estado }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cliente",
+              "displayName": "cliente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cantidad",
+              "displayName": "cantidad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "monto",
+              "displayName": "monto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "estado",
+              "displayName": "estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        512,
+        16
+      ],
+      "id": "43e41079-fa6b-43e4-8371-e93d4f59bc05",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "NvWwM1xB3Yw1p3gG",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        720,
+        16
+      ],
+      "id": "cac04ad3-422b-4f2c-a99a-b0696fbfc942",
+      "name": "Wait",
+      "webhookId": "9a0aaac0-b36e-43a1-850a-dbe39f0bcd8e"
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "sum",
+              "field": "=monto"
+            },
+            {
+              "field": "id"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1.1,
+      "position": [
+        928,
+        16
+      ],
+      "id": "e84bc362-3616-4290-81b0-cc75ef0eabc9",
+      "name": "Summarize"
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "concatenate",
+              "field": "cliente"
+            },
+            {
+              "aggregation": "concatenate",
+              "field": "email"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1.1,
+      "position": [
+        944,
+        256
+      ],
+      "id": "8c4b21b8-ac14-4b85-ae51-27cb82c6ae62",
+      "name": "Summarize_Errores"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1200,
+        144
+      ],
+      "id": "1036ac03-dfa1-4cc9-8357-68a5db138427",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "sendTo": "linarezedgar.netdeveloper@gmail.com, liricasedificantes@gmail.com, linareze696@gmail.com",
+        "subject": "Ejercicio de N8N: Reporte de Automatización n8n",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: 'Segoe UI', Arial, sans-serif; color: #333; line-height: 1.6; background-color: #f4f7f6; margin: 0; padding: 0; }\n  .container { width: 100%; max-width: 600px; margin: 20px auto; border: 1px solid #e0e0e0; border-radius: 10px; background-color: #ffffff; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }\n  .header { background-color: #1a2a3a; color: #ffffff; padding: 25px; text-align: center; }\n  .content { padding: 30px; }\n  .status-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 20px; }\n  .status-success { background-color: #d4edda; color: #155724; }\n  .metric-box { background-color: #f8f9fa; border-left: 5px solid #28a745; padding: 20px; margin-bottom: 25px; border-radius: 4px; }\n  .error-box { background-color: #fff5f5; border: 1px dashed #e74c3c; border-left: 5px solid #e74c3c; padding: 20px; border-radius: 4px; }\n  .monto { font-size: 28px; font-weight: bold; color: #28a745; display: block; margin-top: 5px; }\n  .footer { background-color: #f1f1f1; color: #777; padding: 15px; text-align: center; font-size: 12px; }\n  .label { font-weight: bold; color: #555; font-size: 14px; }\n  .list-item { background: #fff; padding: 8px; border-radius: 4px; margin-top: 10px; font-family: monospace; font-size: 13px; color: #c0392b; border: 1px solid #ffdada; }\n  .cta-container { text-align: center; margin-top: 30px; }\n  .button { background-color: #2980b9; color: #ffffff; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; }\n</style>\n</head>\n<body>\n  <div class=\"container\">\n    <div class=\"header\">\n      <h1 style=\"margin:0;\">Reporte Operativo moBill24</h1>\n    </div>\n    <div class=\"content\">\n      <div class=\"status-badge status-success\">Procesamiento Completado</div>\n      \n      <h2>📊 Resumen de Ventas</h2>\n      <p>Se ha finalizado la integración de los registros validados correctamente.</p>\n      \n      <div class=\"metric-box\">\n        <span class=\"label\">Total Registros Exitosos:</span><br>\n        <strong>{{ $json.count_id }}</strong> ventas procesadas.<br><br>\n        <span class=\"label\">Monto Total Recaudado:</span>\n        <span class=\"monto\">$ {{ $json.sum_monto.toFixed(2) }}</span>\n      </div>\n\n      <div class=\"error-box\">\n        <h3 style=\"color: #e74c3c; margin-top: 0;\">⚠️ Alerta de Validación</h3>\n        <p style=\"margin-bottom: 5px;\">Se detectaron registros con errores que requieren revisión manual:</p>\n        \n        <div class=\"label\">Clientes afectados:</div>\n        <div class=\"list-item\">\n          {{ $json.concatenated_cliente || \"Ninguno\" }}\n        </div>\n\n        <div style=\"margin-top: 15px;\" class=\"label\">Correos a revisar:</div>\n        <div class=\"list-item\">\n          {{ $json.concatenated_email || \"Ninguno\" }}\n        </div>\n      </div>\n\n      <div class=\"cta-container\">\n        <p>Puedes revisar el detalle de todos los movimientos en el archivo de Log:</p>\n        <a href=\"{{ $vars.URL_REPORTE_DRIVE }}\" class=\"button\">Ver Archivo en Google Drive</a>\n      </div>\n    </div>\n    <div class=\"footer\">\n      Este es un reporte automático generado por el sistema n8n.<br>\n      &copy; 2026 moBill24 Backend Operations\n    </div>\n  </div>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1392,
+        144
+      ],
+      "id": "eb2928a9-960f-41f1-9420-e7e93e79fd96",
+      "name": "Send a message1",
+      "webhookId": "2e2d6b32-f57f-4e42-9b86-1e6546bbeb22",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BF0H68Mlp6Go4dbt",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "XML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "XML": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "AI Transform",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Transform": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Duplicates": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicates1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Duplicates1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Summarize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarize": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Summarize_Errores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarize_Errores": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "69873230-8965-4d3f-9687-fbd1fedf8427",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dacf74f746a5600ccd3c13bea981d616cbbc49c1c627868d1ee2c2bde878613e"
+  },
+  "id": "K7wleYgDmYa1N0zP",
+  "tags": []
+}
