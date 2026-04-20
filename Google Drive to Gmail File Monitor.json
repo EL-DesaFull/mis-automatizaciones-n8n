@@ -1,0 +1,89 @@
+{
+  "name": "Google Drive to Gmail File Monitor",
+  "nodes": [
+    {
+      "parameters": {
+        "sendTo": "linarezedgar.netdeveloper@gmail.com",
+        "subject": "Ejercicio N8N: Notificación de cambios en la carpeta 00_Trigger",
+        "message": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <style>\n        @page {\n            size: A4;\n            margin: 0;\n            background-color: #f8fafc;\n        }\n        body {\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n            margin: 0;\n            padding: 50px 20px;\n            background-color: #f8fafc;\n        }\n        .card {\n            max-width: 550px;\n            margin: 0 auto;\n            background: #ffffff;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.05);\n            border: 1px solid #e2e8f0;\n            overflow: hidden;\n        }\n        .banner {\n            background: #1e293b;\n            color: #f1f5f9;\n            padding: 25px;\n            text-align: center;\n        }\n        .banner h2 {\n            margin: 0;\n            font-size: 16pt;\n            font-weight: 600;\n        }\n        .body-content {\n            padding: 40px 30px;\n            text-align: center;\n        }\n        .status-icon {\n            font-size: 48pt;\n            margin-bottom: 20px;\n        }\n        .folder-tag {\n            background-color: #fef3c7;\n            color: #92400e;\n            padding: 5px 12px;\n            border-radius: 6px;\n            font-weight: bold;\n            font-family: 'Courier New', Courier, monospace;\n            font-size: 11pt;\n        }\n        .info-text {\n            font-size: 11pt;\n            color: #475569;\n            line-height: 1.6;\n            margin: 25px 0;\n        }\n        .action-button {\n            display: inline-block;\n            background-color: #2563eb;\n            color: #ffffff;\n            padding: 14px 30px;\n            text-decoration: none;\n            border-radius: 8px;\n            font-weight: 600;\n            margin-top: 10px;\n        }\n        .footer-note {\n            padding: 20px;\n            background: #f1f5f9;\n            color: #64748b;\n            font-size: 9pt;\n            text-align: center;\n            border-top: 1px solid #e2e8f0;\n        }\n        .important {\n            color: #dc2626;\n            font-weight: bold;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"card\">\n        <div class=\"banner\">\n            <h2>Notificación de Sistema</h2>\n        </div>\n        <div class=\"body-content\">\n            <div class=\"status-icon\">📁</div>\n            <p><span class=\"folder-tag\">Directorio: 00_Trigger</span></p>\n            <p class=\"info-text\">\n                Se ha detectado la presencia de un <strong>nuevo archivo: \"{{ $json.name }}\"</strong>, cargado en fecha {{ $json.createdTime.toDateTime().toFormat('dd/MM/yyyy HH:mm') }}, listo para ser procesado. \n                <br><br>\n                <span class=\"important\">¡Atención!</span> Es fundamental revisar este documento para validar que la estructura de datos sea correcta antes de iniciar la integración.\n            </p>\n            <a href=\"https://drive.google.com/drive/folders/1O5q7f6V1jlIa3h97h9AtfIIxj4YtJ0E-?usp=sharing\" class=\"action-button\">Ir a la Carpeta 00_Trigger</a>\n        </div>\n        <div class=\"footer-note\">\n            Este mensaje fue generado automáticamente por n8n.<br>\n            © 2026 Blackfin Corp - Automatización de Backend.\n        </div>\n    </div>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "2c2d1239-be2c-48a4-8488-9b7b5d38ac9a",
+      "name": "Send a message",
+      "webhookId": "b175166f-c1aa-4dd6-acff-59ca20d88dcb",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BF0H68Mlp6Go4dbt",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "hour": 8
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1O5q7f6V1jlIa3h97h9AtfIIxj4YtJ0E-",
+          "mode": "list",
+          "cachedResultName": "00_Trigger",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1O5q7f6V1jlIa3h97h9AtfIIxj4YtJ0E-"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f3542271-bd16-41c1-8fb2-b0551c1c90ba",
+      "name": "Google Drive Trigger",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "P3DhtMAcy1M8ql0Y",
+          "name": "Google Drive OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "9c46d39d-c0d7-465a-b581-0d379701fcbc",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dacf74f746a5600ccd3c13bea981d616cbbc49c1c627868d1ee2c2bde878613e"
+  },
+  "id": "w1j02GGWkQu4Zz64",
+  "tags": []
+}
