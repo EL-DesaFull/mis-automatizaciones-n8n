@@ -58,6 +58,21 @@
           "name": "Google Drive OAuth2 API"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "## Implementada detección automática de archivos y notificación por email \n- Configurado Google Drive Trigger para monitorear eventos de creación de archivos.\n- Integrado nodo de Gmail para envío de notificaciones automáticas.\n- Aplicado formato de fecha human-readable (Luxon) en el cuerpo del mensaje.\n- Implementado diseño HTML profesional para la notificación de usuario.",
+        "height": 304,
+        "width": 416
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -544,
+        -192
+      ],
+      "typeVersion": 1,
+      "id": "4368b699-12f8-4381-ad57-57e11839292b",
+      "name": "Sticky Note"
     }
   ],
   "pinData": {},
@@ -79,7 +94,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "9c46d39d-c0d7-465a-b581-0d379701fcbc",
+  "versionId": "7b01aa13-b820-4506-b52d-c27fafc8592f",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "dacf74f746a5600ccd3c13bea981d616cbbc49c1c627868d1ee2c2bde878613e"
