@@ -1,0 +1,142 @@
+{
+  "name": "EnviarDatosHTTPRequest",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "=none",
+        "formTitle": "Solicitud de Licencia de Conducir",
+        "formDescription": "Solicitud de Licencia",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Nombres",
+              "placeholder": "Ingrese los nombres del solicitante:"
+            },
+            {
+              "fieldLabel": "Apellidos",
+              "placeholder": "Ingrese los apellidos del solicitante:"
+            },
+            {
+              "fieldLabel": "Edad",
+              "fieldType": "number",
+              "placeholder": "Ingrese la edad del solicitante:"
+            },
+            {
+              "fieldLabel": "Grado",
+              "fieldType": "number",
+              "placeholder": "Ingrese el grado de licencia solicitado:"
+            },
+            {
+              "fieldLabel": "Nota Teórica",
+              "fieldType": "number",
+              "placeholder": "Ingrese la nota teórica del solicitante:"
+            },
+            {
+              "fieldLabel": "Nota Práctica",
+              "fieldType": "number",
+              "placeholder": "Ingrese la nota práctica del solicitante:"
+            },
+            {
+              "fieldLabel": "Email",
+              "placeholder": "Ingrese el email del solicitante:"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "cb71db09-3ead-4d8a-bf3e-c26c2a6213cb",
+      "name": "On form submission",
+      "webhookId": "5a50df76-b032-4bb7-89b8-68bc8d5c7f8e",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "IYug3KampoO1hZsY",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://licencias-api-cloud.onrender.com/api/Licencias/solicitar",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "nombre",
+              "value": "={{ $json.Nombres }}"
+            },
+            {
+              "name": "apellido",
+              "value": "={{ $json.Apellidos }}"
+            },
+            {
+              "name": "edad",
+              "value": "={{ $json.Edad }}"
+            },
+            {
+              "name": "grado",
+              "value": "={{ $json.Grado }}"
+            },
+            {
+              "name": "notaTeorica",
+              "value": "={{ $json['Nota Teórica'] }}"
+            },
+            {
+              "name": "notaPractica",
+              "value": "={{ $json['Nota Práctica'] }}"
+            },
+            {
+              "name": "email",
+              "value": "={{ $json.Email }}"
+            },
+            {
+              "name": "fechaRegistro",
+              "value": "={{ $json.submittedAt.toDate().toISOString() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "6ba76ecf-c21e-4dcc-ae6f-0276480ce5ae",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "3d8561fd-b10e-48c0-9348-0074b0ac6e0c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dacf74f746a5600ccd3c13bea981d616cbbc49c1c627868d1ee2c2bde878613e"
+  },
+  "id": "mILV59moipYrQVPV",
+  "tags": []
+}
