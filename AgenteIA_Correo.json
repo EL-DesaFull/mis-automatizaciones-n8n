@@ -1,0 +1,147 @@
+{
+  "name": "AgenteIA_Correo",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6ec239a5-fd10-439a-bff1-7d86785f7711",
+      "name": "When chat message received",
+      "webhookId": "6a3bbc8e-2bd0-4baf-8029-24ebd86d7550"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=#Rol\nEres un asistente capaz de enviar emails\n\n#Tareas\n- Tu función principal es responder a este mensaje {{ $json.chatInput }}\n\n- Utiliza información de la herramienta Email para enviar correos electrónicos\n\n#Notas\n- Para enviar un email debes pedirle al usuario el email del destinatario, y lo que quiere enviar por correo.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "57af971d-0e35-490b-8821-08289049ee90",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-20b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "070dbd79-24f5-4d9a-b00e-ff2a961606fb",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "vxxrLrOiijkgXejf",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "e13fb730-cee0-42ef-8f2a-ffc4571296f8",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $fromAI(\"emailAddress\",\"el email del destinatario\") }}",
+        "subject": "={{ $fromAI(\"subject\",\"el asunto del email\") }}",
+        "message": "=  {{ $fromAI(\"message\",\"contenido del mensaje\") }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        368,
+        208
+      ],
+      "id": "055afde1-76fe-4340-87e3-6203152208f1",
+      "name": "Emails",
+      "webhookId": "30883414-08d0-40b2-8367-4ce34d67d4b0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "B0r0Mtfb2kRuK5cx",
+          "name": "Gmail Liricas"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Emails": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "a60b3751-d971-4a92-ade1-940dbd226e26",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0082b9de5e9eaeedc54b820b850addc91401fff175b993fe2c8109abec65f571"
+  },
+  "id": "QcbKa2IKSmqLG4OH",
+  "tags": []
+}
